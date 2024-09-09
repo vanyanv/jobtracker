@@ -1,8 +1,8 @@
 import * as motion from 'framer-motion/client';
 
-export function SignupForm() {
+export function SigninForm() {
   return (
-    <div className='min-h-screen bg-gradient-to-b from-[#1d1d40] to-[#09092e] flex items-center justify-center overflow-hidden relative'>
+    <form className='min-h-screen bg-gradient-to-b from-[#1d1d40] to-[#09092e] flex items-center justify-center overflow-hidden relative'>
       {/* Floating orbs with Framer Motion */}
       <motion.div
         className='absolute top-1/4 left-10 w-32 h-32 bg-purple-600 rounded-full blur-xl opacity-40'
@@ -21,28 +21,8 @@ export function SignupForm() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className='text-4xl font-bold text-white text-center'>Sign Up</h1>
-        <form className='space-y-6'>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <label
-              htmlFor='name'
-              className='block text-sm font-medium text-gray-400'
-            >
-              Name
-            </label>
-            <input
-              id='name'
-              name='Name'
-              type='text'
-              autoComplete='name'
-              required
-              className='appearance-none block w-full px-4 py-2 bg-[#13132b] border border-gray-600 rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500'
-            />
-          </motion.div>
+        <h1 className='text-4xl font-bold text-white text-center'>Sign In</h1>
+        <div className='space-y-6'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -91,7 +71,7 @@ export function SignupForm() {
           >
             Sign In
           </motion.button>
-        </form>
+        </div>
         <p className='text-sm text-center text-gray-400'>
           Don&apos;t have an account?{' '}
           <a
@@ -102,6 +82,6 @@ export function SignupForm() {
           </a>
         </p>
       </motion.div>
-    </div>
+    </form>
   );
 }

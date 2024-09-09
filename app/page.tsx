@@ -31,7 +31,7 @@ export default function HomePage() {
           </p>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          <Link href='/login'>
+          <Link href='/signIn'>
             <motion.div
               className='block py-3 px-6 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold text-center focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 shadow-lg transform hover:scale-105'
               whileHover={{ scale: 1.05 }}
@@ -40,7 +40,7 @@ export default function HomePage() {
               Login
             </motion.div>
           </Link>
-          <Link href='/signup'>
+          <Link href='/signUp'>
             <motion.div
               className='block py-3 px-6 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold text-center focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 shadow-lg transform hover:scale-105'
               whileHover={{ scale: 1.05 }}
