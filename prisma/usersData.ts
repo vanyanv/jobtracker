@@ -1,5 +1,3 @@
-import { use } from 'react';
-
 const users = [
   {
     email: 'john.doe@example.com',
