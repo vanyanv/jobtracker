@@ -13,7 +13,9 @@ export default async function SigninForm() {
           action={async (formData) => {
             'use server';
             try {
-              await signIn('credentials', formData);
+              await signIn('credentials', formData, {
+                redirectTo: '/dashboard',
+              });
             } catch (error) {
               if (error instanceof AuthError) {
                 // Handle error
@@ -75,7 +77,7 @@ export default async function SigninForm() {
                 action={async () => {
                   'use server';
                   try {
-                    await signIn(provider.id);
+                    await signIn(provider.id, { redirectTo: '/dashboard' });
                   } catch (error) {
                     if (error instanceof AuthError) {
                       // Handle error
