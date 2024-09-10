@@ -11,13 +11,13 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ user }: SidebarProps) {
-  const navigationLinks = [
-    'Dashboard',
-    'Job Applications',
-    'Saved Jobs',
-    'Interviews',
-    'Analytics',
-  ];
+  const navigationLinks = {
+    Dashboard: './dashboard',
+    'Job Applications': './applications',
+    'Saved Jobs': './saved',
+    Interviews: './interviews',
+    Analytics: './analytics',
+  };
 
   return (
     <aside className='w-64 bg-white shadow-lg min-h-screen flex flex-col p-6'>
@@ -35,7 +35,7 @@ export default function Sidebar({ user }: SidebarProps) {
 
       {/* Navigation Links */}
       <nav className='mt-8 space-y-6'>
-        {navigationLinks.map((nav: string, index: number) => (
+        {Object.keys(navigationLinks).map((nav: string, index: number) => (
           <SidebarLinks key={index} id={nav} navigation={nav} />
         ))}
       </nav>
