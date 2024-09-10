@@ -28,3 +28,10 @@ export type FormState =
       message?: string;
     }
   | undefined;
+
+export type ApplicationTypes = {
+  id: string;
+  title: string;
+  company: string;
+  status: string;
+};

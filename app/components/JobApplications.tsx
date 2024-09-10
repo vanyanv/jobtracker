@@ -1,31 +1,6 @@
 import React from 'react';
-
-const applications = [
-  {
-    id: '1',
-    title: 'Frontend Developer',
-    company: 'Tech Co.',
-    status: 'Applied',
-  },
-  {
-    id: '2',
-    title: 'Backend Engineer',
-    company: 'Innovate Inc.',
-    status: 'Interview',
-  },
-  {
-    id: '3',
-    title: 'Full Stack Developer',
-    company: 'Future Solutions',
-    status: 'Offer',
-  },
-  {
-    id: '4',
-    title: 'UI/UX Designer',
-    company: 'Creative Labs',
-    status: 'Rejected',
-  },
-];
+import { applications } from '../libs/placeholder-data';
+import { ApplicationTypes } from '../libs/definitions';
 
 export default function JobApplications() {
   return (
@@ -35,7 +10,7 @@ export default function JobApplications() {
         <p className='text-gray-500'>You have not applied to any jobs yet.</p>
       ) : (
         <ul className='space-y-4'>
-          {applications.map((job) => (
+          {applications.map((job: ApplicationTypes) => (
             <li
               key={job.id}
               className='flex items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50'

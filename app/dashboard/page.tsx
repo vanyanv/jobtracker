@@ -5,12 +5,18 @@ import Navbar from '../components/ui/Navbar';
 import Sidebar from '../components/ui/Sidebar';
 import JobApplications from '../components/JobApplications';
 
+
 export default async function page() {
   const session = await auth();
-  const user = session?.user || {}; // Provide a default empty object if user is undefined
+
+  //check to see if there is a session otherwise re-direct to login
+  if (!session) {
+    redirect('/');
+  }
+  const user = session?.user || {};
 
   if (!user) {
-    redirect('/signIn');
+    redirect('/');
   }
   return (
     <>
