@@ -1,11 +1,11 @@
 import React from 'react';
 
-import JobApplications from '../components/JobApplications';
+import Dashboard from '../components/ui/Dashboard';
 
 export default function page() {
   return (
     <>
-      <JobApplications />
+      <Dashboard />
     </>
   );
 }

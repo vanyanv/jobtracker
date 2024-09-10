@@ -2,16 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 
 export default function SidebarLinks({
-  key,
+  id,
   navigation,
 }: {
-  key: string;
+  id: string;
   navigation: string;
 }) {
   return (
     <>
       <Link
-        key={key}
+        key={id}
         href={`/${navigation}`}
         className='flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 hover:underline'
       >
