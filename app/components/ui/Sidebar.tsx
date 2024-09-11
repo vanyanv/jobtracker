@@ -12,11 +12,11 @@ type SidebarProps = {
 
 export default function Sidebar({ user }: SidebarProps) {
   const navigationLinks: { [key: string]: string } = {
-    Dashboard: './',
-    'Job Applications': './dashboard/applications',
-    'Saved Jobs': './dashboard/saved',
-    Interviews: './dashboard/interviews',
-    Analytics: './dashboard/analytics',
+    Dashboard: '/dashboard',
+    'Job Applications': '/dashboard/applications',
+    'Saved Jobs': '/dashboard/saved',
+    Interviews: '/dashboard/interviews',
+    Analytics: '/dashboard/analytics',
   };
 
   return (

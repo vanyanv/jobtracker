@@ -35,7 +35,7 @@ const lineChartData = {
 
 export default function Analytics() {
   return (
-    <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 '>
+    <div className='h-screen p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50'>
       {/* Header */}
       <div className='mb-8'>
         <h1 className='text-4xl font-semibold text-gray-900'>Analytics</h1>
@@ -65,11 +65,19 @@ export default function Analytics() {
         </div>
       </div>
       {/* Line Chart for Applications Trend */}
-      <div className='bg-white p-8 rounded-lg shadow-lg mb-8 '>
-        <h2 className='text-2xl font-semibold text-gray-900 mb-6'>
-          Monthly Application Trends
-        </h2>
-        <LineChart data={lineChartData} />
+      <div className='flex gap-10 flex-wrap'>
+        <div className='bg-white p-6 rounded-lg shadow-md mb-6 flex-1 min-w-[300px]'>
+          <h2 className='text-xl font-semibold text-gray-800 mb-4'>
+            Monthly Application Trends
+          </h2>
+          <LineChart data={lineChartData} />
+        </div>
+        <div className='bg-white p-6 rounded-lg shadow-md mb-6 flex-1 min-w-[300px]'>
+          <h2 className='text-xl font-semibold text-gray-800 mb-4'>
+            Monthly Application Trends
+          </h2>
+          <LineChart data={lineChartData} />
+        </div>
       </div>
     </div>
   );
