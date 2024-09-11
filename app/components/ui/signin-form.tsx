@@ -1,102 +1,69 @@
-import { signIn, providerMap } from '@/auth';
+import * as motion from 'framer-motion/client';
+import { FcGoogle } from 'react-icons/fc';
+import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-export default async function SigninForm() {
+export function SigninForm() {
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-100 p-4'>
-      <div className='w-full max-w-md bg-white shadow-md rounded-lg p-6'>
-        <h1 className='text-2xl font-bold text-center text-gray-800 mb-6'>
-          Sign In
-        </h1>
+    <div className='min-h-screen flex items-center justify-center bg-gradient-to-b from-[#1d1d40] to-[#09092e] overflow-hidden relative p-4'>
+      {/* Floating orbs with Framer Motion */}
+      <motion.div
+        className='absolute top-1/4 left-10 w-32 h-32 bg-purple-600 rounded-full blur-xl opacity-40'
+        animate={{ y: [0, 20, -20, 0] }}
+        transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className='absolute bottom-10 right-20 w-24 h-24 bg-blue-700 rounded-full blur-xl opacity-50'
+        animate={{ y: [0, 15, -15, 0] }}
+        transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
+      />
 
-        <form
-          action={async (formData) => {
-            'use server';
-            try {
-              await signIn('credentials', formData, {
-                redirectTo: '/dashboard',
-              });
-            } catch (error) {
-              if (error instanceof AuthError) {
-                // Handle error
-              }
-              throw error;
-            }
-          }}
-          className='space-y-4'
-        >
-          <div>
-            <label
-              htmlFor='email'
-              className='block text-sm font-medium text-gray-700'
-            >
-              Email
-            </label>
-            <input
-              name='email'
-              id='email'
-              type='email'
-              className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-              placeholder='Enter your email'
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor='password'
-              className='block text-sm font-medium text-gray-700'
-            >
-              Password
-            </label>
-            <input
-              name='password'
-              id='password'
-              type='password'
-              className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-              placeholder='Enter your password'
-              required
-            />
-          </div>
-
-          <div>
-            <input
-              type='submit'
-              value='Sign In'
-              className='w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200'
-            />
-          </div>
-        </form>
+      <motion.div
+        className='relative w-full max-w-md mx-auto p-8 space-y-8 bg-[#23234f] rounded-2xl shadow-2xl border border-gray-700'
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className='text-4xl font-bold text-white text-center'>Sign In</h1>
 
         <div className='mt-6'>
-          <p className='text-center text-gray-600'>Or sign in with:</p>
-          <div className='flex flex-col gap-2 mt-4'>
-            {Object.values(providerMap).map((provider) => (
-              <form
-                key={provider.id}
-                action={async () => {
-                  'use server';
-                  try {
-                    await signIn(provider.id, { redirectTo: '/dashboard' });
-                  } catch (error) {
-                    if (error instanceof AuthError) {
-                      // Handle error
-                    }
-                    throw error;
-                  }
-                }}
-              >
-                <button
-                  type='submit'
-                  className='w-full flex justify-center items-center bg-gray-100 text-gray-700 py-2 px-4 rounded-md border border-gray-300 hover:bg-gray-200 transition duration-200'
-                >
-                  <span>Sign in with {provider.name}</span>
-                </button>
-              </form>
-            ))}
-          </div>
+          <p className='text-center text-gray-300 mb-4'>
+            Sign in your Google account:
+          </p>
+
+          <form
+            action={async () => {
+              'use server';
+              try {
+                await signIn('google', { redirectTo: '/dashboard' });
+              } catch (error) {
+                if (error instanceof AuthError) {
+                  // Handle error
+                }
+                throw error;
+              }
+            }}
+          >
+            <button
+              type='submit'
+              className='w-full flex justify-center items-center bg-white text-gray-800 py-3 px-4 rounded-md shadow-md hover:bg-gray-100 transition duration-200'
+            >
+              <FcGoogle className='w-10 h-6' />
+              <span>Sign In With Google</span>
+            </button>
+          </form>
         </div>
-      </div>
+
+        <p className='text-sm text-center text-gray-400'>
+          Dont have an account?{' '}
+          <a
+            href='/signUp'
+            className='text-purple-500 hover:text-purple-400 transition-colors duration-200'
+          >
+            Sign up here
+          </a>
+        </p>
+      </motion.div>
     </div>
   );
 }

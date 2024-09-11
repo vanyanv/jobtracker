@@ -11,12 +11,12 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ user }: SidebarProps) {
-  const navigationLinks = {
-    Dashboard: './dashboard',
-    'Job Applications': './applications',
-    'Saved Jobs': './saved',
-    Interviews: './interviews',
-    Analytics: './analytics',
+  const navigationLinks: { [key: string]: string } = {
+    Dashboard: './',
+    'Job Applications': './dashboard/applications',
+    'Saved Jobs': './dashboard/saved',
+    Interviews: './dashboard/interviews',
+    Analytics: './dashboard/analytics',
   };
 
   return (
@@ -35,8 +35,12 @@ export default function Sidebar({ user }: SidebarProps) {
 
       {/* Navigation Links */}
       <nav className='mt-8 space-y-6'>
-        {Object.keys(navigationLinks).map((nav: string, index: number) => (
-          <SidebarLinks key={index} id={nav} navigation={nav} />
+        {Object.keys(navigationLinks).map((key) => (
+          <SidebarLinks
+            key={key}
+            navigation={navigationLinks[key]}
+            name={key}
+          />
         ))}
       </nav>
       {/* Footer Links */}
