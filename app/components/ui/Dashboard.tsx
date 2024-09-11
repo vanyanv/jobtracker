@@ -1,8 +1,11 @@
+'use client';
 import { ApplicationTypes } from '@/app/libs/definitions';
 import { applications } from '@/app/libs/placeholder-data';
-import React from 'react';
+import React, { useState } from 'react';
+import ApplicationForm from './ApplicationForm';
 
 export default function Dashboard() {
+  const [open, setOpen] = useState(false);
   return (
     <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 max-h-screen'>
       {/* Header */}
@@ -78,10 +81,15 @@ export default function Dashboard() {
 
       {/* Add New Application Button */}
       <div className='flex justify-end'>
-        <button className='bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold shadow-md transition-all duration-300'>
+        <button
+          onClick={() => setOpen(true)}
+          className='bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold shadow-md transition-all duration-300'
+        >
           + Add New Application
         </button>
       </div>
+
+      {open && <ApplicationForm setOpen={setOpen} />}
     </div>
   );
 }
