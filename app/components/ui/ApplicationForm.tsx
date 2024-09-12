@@ -37,6 +37,7 @@ export default async function ApplicationForm({
               </label>
               <input
                 type='text'
+                name='jobTitle'
                 className='w-full px-3 py-2 border border-gray-300 rounded'
                 required
               />
@@ -45,7 +46,10 @@ export default async function ApplicationForm({
               <label className='block text-gray-700 text-sm font-medium mb-2'>
                 Status
               </label>
-              <select className='w-full px-3 py-2 border border-gray-300 rounded'>
+              <select
+                className='w-full px-3 py-2 border border-gray-300 rounded'
+                name='status'
+              >
                 <option value='APPLIED'>Applied</option>
                 <option value='INTERVIEW'>Interview</option>
                 <option value='OFFERED'>Offered</option>
@@ -58,7 +62,10 @@ export default async function ApplicationForm({
               <label className='block text-gray-700 text-sm font-medium mb-2'>
                 Notes
               </label>
-              <textarea className='w-full px-3 py-2 border border-gray-300 rounded' />
+              <textarea
+                name='notes'
+                className='w-full px-3 py-2 border border-gray-300 rounded'
+              />
             </div>
             <div className='flex justify-end'>
               <button
