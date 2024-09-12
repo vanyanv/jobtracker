@@ -6,6 +6,7 @@ import ApplicationForm from './ApplicationForm';
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
+
   return (
     <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 max-h-screen'>
       {/* Header */}

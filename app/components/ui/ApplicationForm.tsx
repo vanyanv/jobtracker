@@ -1,7 +1,8 @@
+'use server';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function ApplicationForm({
+export default async function ApplicationForm({
   setOpen,
 }: {
   setOpen: (action: boolean) => void;
@@ -25,6 +26,7 @@ export default function ApplicationForm({
               </label>
               <input
                 type='text'
+                name='companyName'
                 className='w-full px-3 py-2 border border-gray-300 rounded'
                 required
               />

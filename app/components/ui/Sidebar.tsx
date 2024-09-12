@@ -1,10 +1,6 @@
 import SidebarLinks from '../SidebarLinks';
 import { signOut } from '@/auth';
-type User = {
-  name?: string | null | undefined;
-  email?: string | null | undefined;
-  image?: string | null | undefined;
-};
+import { User } from '@/app/libs/definitions';
 
 type SidebarProps = {
   user: User;
