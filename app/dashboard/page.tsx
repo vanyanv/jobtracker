@@ -1,5 +1,11 @@
 import React from 'react';
 
+import Dashboard from '../components/ui/Dashboard';
+
 export default function page() {
-  return <div>{'Dashboard'}</div>;
+  return (
+    <>
+      <Dashboard />
+    </>
+  );
 }
