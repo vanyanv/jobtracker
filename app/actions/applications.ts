@@ -1,19 +1,9 @@
 'use server';
 import prisma from '../libs/prisma';
 import { auth } from '@/auth';
-import { Schema, z } from 'zod';
-// model Application {
-//     id          String            @id @default(uuid())
-//     companyName String
-//     jobTitle    String
-//     status      ApplicationStatus
-//     notes       String?
-//     createdAt   DateTime          @default(now())
-//     updatedAt   DateTime          @updatedAt
-
-//     userID String
-//     user   User   @relation(fields: [userID], references: [id])
-//   }
+import { ApplicationStatus } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
 
 const jobFormSchema = z.object({
   companyName: z.string(),
@@ -26,6 +16,11 @@ export default async function addJob(formData: FormData) {
   'use server';
 
   const session = await auth();
+
+  if (!session) {
+    return;
+  }
+
   const user = session?.user;
 
   console.log(user);
@@ -45,4 +40,20 @@ export default async function addJob(formData: FormData) {
       errors: validatedField.error.flatten().fieldErrors,
     };
   }
+
+  const newJob = await prisma.application.create({
+    data: {
+      companyName: rawFormData.companyName as string,
+      jobTitle: rawFormData.jobTitle as string,
+      status: rawFormData.status as ApplicationStatus,
+      notes: rawFormData.notes as string,
+      user: {
+        connect: {
+          id: user?.id,
+        },
+      },
+    },
+  });
+  revalidatePath('/');
+  return newJob;
 }
