@@ -12,7 +12,7 @@ const jobFormSchema = z.object({
   notes: z.optional(z.string()),
 });
 
-export default async function addJob(formData: FormData) {
+export async function addJob(formData: FormData) {
   'use server';
 
   const session = await auth();
@@ -56,4 +56,48 @@ export default async function addJob(formData: FormData) {
   });
   revalidatePath('/');
   return newJob;
+}
+
+export async function getAllJobs() {
+  'use server';
+
+  const session = await auth();
+
+  if (!session) {
+    return;
+  }
+  const user = session?.user;
+
+  if (!user) {
+    return;
+  }
+
+  const jobs = await prisma.application.findMany({
+    where: {
+      userID: user.id,
+    },
+  });
+  return jobs;
+}
+
+export async function deleteAJob(id: string) {
+  'use server';
+
+  const session = await auth();
+
+  if (!session) {
+    return;
+  }
+  const user = session?.user;
+
+  if (!user) {
+    return;
+  }
+
+  const jobs = await prisma.application.delete({
+    where: {
+      id,
+    },
+  });
+  return jobs;
 }
