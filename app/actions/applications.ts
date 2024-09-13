@@ -13,7 +13,6 @@ const jobFormSchema = z.object({
 });
 
 export async function addJob(formData: FormData) {
-  'use server';
 
   const session = await auth();
 
@@ -54,6 +53,7 @@ export async function addJob(formData: FormData) {
       },
     },
   });
+  
   revalidatePath('/');
   return newJob;
 }
