@@ -1,4 +1,3 @@
-'use server';
 import prisma from '../libs/prisma';
 import { auth } from '@/auth';
 import { ApplicationStatus } from '@prisma/client';
@@ -13,16 +12,20 @@ const jobFormSchema = z.object({
 });
 
 export async function addJob(formData: FormData) {
+  'use server';
 
   const session = await auth();
 
   if (!session) {
-    return;
+    throw new Error('Authentication failed');
   }
 
-  const user = session?.user;
+  const user = session.user;
 
-  console.log(user);
+  if (!user) {
+    throw new Error('User not found');
+  }
+
   const rawFormData = {
     companyName: formData.get('companyName'),
     jobTitle: formData.get('jobTitle'),
@@ -30,14 +33,10 @@ export async function addJob(formData: FormData) {
     notes: formData.get('notes'),
   };
 
-  const validatedField = jobFormSchema.safeParse({
-    rawFormData,
-  });
-  // Return early if the form data is invalid
+  const validatedField = jobFormSchema.safeParse(rawFormData);
+
   if (!validatedField.success) {
-    return {
-      errors: validatedField.error.flatten().fieldErrors,
-    };
+    throw new Error('Invalid form data');
   }
 
   const newJob = await prisma.application.create({
@@ -48,28 +47,26 @@ export async function addJob(formData: FormData) {
       notes: rawFormData.notes as string,
       user: {
         connect: {
-          id: user?.id,
+          id: user.id,
         },
       },
     },
   });
-  
   revalidatePath('/');
   return newJob;
 }
 
 export async function getAllJobs() {
-  'use server';
-
   const session = await auth();
 
   if (!session) {
-    return;
+    throw new Error('Authentication failed');
   }
-  const user = session?.user;
+
+  const user = session.user;
 
   if (!user) {
-    return;
+    throw new Error('User not found');
   }
 
   const jobs = await prisma.application.findMany({
@@ -77,27 +74,30 @@ export async function getAllJobs() {
       userID: user.id,
     },
   });
+
+  revalidatePath('/');
   return jobs;
 }
 
 export async function deleteAJob(id: string) {
-  'use server';
-
   const session = await auth();
 
   if (!session) {
-    return;
+    throw new Error('Authentication failed');
   }
-  const user = session?.user;
+
+  const user = session.user;
 
   if (!user) {
-    return;
+    throw new Error('User not found');
   }
 
-  const jobs = await prisma.application.delete({
+  const job = await prisma.application.delete({
     where: {
       id,
     },
   });
-  return jobs;
+
+  revalidatePath('/');
+  return job;
 }
