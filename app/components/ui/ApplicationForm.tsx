@@ -1,7 +1,8 @@
+import { addJob } from '@/app/actions/applications';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default async function ApplicationForm({
+export default function ApplicationForm({
   setOpen,
 }: {
   setOpen: (action: boolean) => void;
@@ -18,7 +19,7 @@ export default async function ApplicationForm({
           <h2 className='text-2xl font-semibold text-gray-900 mb-6'>
             Add New Application
           </h2>
-          <form>
+          <form action={addJob}>
             <div className='mb-4'>
               <label className='block text-gray-700 text-sm font-medium mb-2'>
                 Company Name
@@ -75,6 +76,7 @@ export default async function ApplicationForm({
                 Cancel
               </button>
               <button
+                onClick={() => setOpen(false)}
                 type='submit'
                 className='bg-blue-500 text-white px-4 py-2 rounded'
               >
