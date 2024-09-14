@@ -33,9 +33,8 @@ export async function addJob(formData: FormData) {
     notes: formData.get('notes'),
   };
 
-  console.log('In AddJob', rawFormData);
   const validatedField = jobFormSchema.safeParse(rawFormData);
-  console.log('In AddJob', validatedField);
+
   if (!validatedField.success) {
     throw new Error('Invalid form data');
   }
@@ -79,6 +78,9 @@ export async function getAllJobs() {
     const jobs = await prisma.application.findMany({
       where: {
         userID: user.id,
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     });
 

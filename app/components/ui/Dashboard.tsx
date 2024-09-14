@@ -1,11 +1,18 @@
 'use client';
-import { ApplicationTypes, User } from '@/app/libs/definitions';
-import { applications } from '@/app/libs/placeholder-data';
+import { User } from '@/app/libs/definitions';
+
 import React, { useState } from 'react';
 import ApplicationForm from './ApplicationForm';
 import DashboardHeader from './DashboardHeader';
+import RecentApplications from './RecentApplications';
+import { Application } from '@prisma/client';
 
-export default function Dashboard({ user }: { user: User }) {
+type DashboardProps = {
+  user: User;
+  jobs: Application[];
+};
+
+export default function Dashboard({ user, jobs }: DashboardProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,46 +43,10 @@ export default function Dashboard({ user }: { user: User }) {
       </div>
 
       {/* Recent Applications */}
-      <div className='bg-white p-6 rounded-lg shadow-lg mb-8'>
-        <h2 className='text-2xl font-semibold text-gray-900 mb-4'>
-          Recent Applications
-        </h2>
-        {applications.length === 0 ? (
-          <p className='text-gray-500'>You have not applied to any jobs yet.</p>
-        ) : (
-          <ul className='space-y-4'>
-            {applications.map((job: ApplicationTypes) => (
-              <li
-                key={job.id}
-                className='flex items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50'
-              >
-                <div className='flex flex-col'>
-                  <h3 className='text-lg font-semibold text-gray-900'>
-                    {job.title}
-                  </h3>
-                  <p className='text-sm text-gray-600'>{job.company}</p>
-                </div>
-                <span
-                  className={`px-3 py-1 text-sm font-medium rounded-full ${
-                    job.status === 'Applied'
-                      ? 'bg-blue-100 text-blue-800'
-                      : job.status === 'Interview'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : job.status === 'Rejected'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-green-100 text-green-800'
-                  }`}
-                >
-                  {job.status}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <RecentApplications jobs={jobs} />
 
       {/* Add New Application Button */}
-      <div className='flex justify-end'>
+      <div className='flex justify-end pt-4'>
         <button
           onClick={() => setOpen(true)}
           className='bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold shadow-md transition-all duration-300'
