@@ -12,7 +12,6 @@ export default function Sidebar({ user }: SidebarProps) {
     Dashboard: '/dashboard',
     Ai: '/dashboard/ai',
     'Job Applications': '/dashboard/applications',
-    'Saved Jobs': '/dashboard/saved',
     Interviews: '/dashboard/interviews',
     Analytics: '/dashboard/analytics',
   };
