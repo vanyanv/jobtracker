@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function loading() {
   return (
-    <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 max-h-screen'>
+    <div className='p-4 sm:p-6 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 min-h-screen sm:max-h-full'>
       {/* Header Skeleton */}
       <div className='mb-8'>
         <div className='h-8 w-1/3 bg-gray-300 rounded animate-pulse'></div>

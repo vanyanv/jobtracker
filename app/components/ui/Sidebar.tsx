@@ -1,6 +1,7 @@
+'use client';
 import SidebarLinks from '../SidebarLinks';
-import { signOut } from '@/auth';
 import { User } from '@/app/libs/definitions';
+import Link from 'next/link';
 
 type SidebarProps = {
   user: User;
@@ -9,6 +10,7 @@ type SidebarProps = {
 export default function Sidebar({ user }: SidebarProps) {
   const navigationLinks: { [key: string]: string } = {
     Dashboard: '/dashboard',
+    Ai: '/dashboard/ai',
     'Job Applications': '/dashboard/applications',
     'Saved Jobs': '/dashboard/saved',
     Interviews: '/dashboard/interviews',
@@ -16,7 +18,7 @@ export default function Sidebar({ user }: SidebarProps) {
   };
 
   return (
-    <aside className='w-64 bg-white shadow-lg min-h-screen flex flex-col p-6'>
+    <aside className='w-64 bg-white shadow-lg min-h-screen flex flex-col p-6 fixed'>
       {/* User Profile */}
       <div className='flex items-center space-x-4 pb-8 border-b border-gray-200'>
         <img
@@ -41,23 +43,13 @@ export default function Sidebar({ user }: SidebarProps) {
       </nav>
       {/* Footer Links */}
       <div className='mt-auto space-y-6'>
-        <a
-          href='#'
+        <Link
+          href='/dashboard/settings'
           className='flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200'
         >
           <i className='fas fa-cog mr-4'></i>
           <span className='text-base font-medium'>Settings</span>
-        </a>
-        <form
-          action={async () => {
-            'use server';
-            await signOut({ redirectTo: '/' });
-          }}
-          className='flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200'
-        >
-          <i className='fas fa-sign-out-alt mr-4'></i>
-          <button className='text-base font-medium'>Logout</button>
-        </form>
+        </Link>
       </div>
     </aside>
   );
