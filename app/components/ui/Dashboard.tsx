@@ -1,23 +1,17 @@
 'use client';
-import { ApplicationTypes } from '@/app/libs/definitions';
+import { ApplicationTypes, User } from '@/app/libs/definitions';
 import { applications } from '@/app/libs/placeholder-data';
 import React, { useState } from 'react';
 import ApplicationForm from './ApplicationForm';
+import DashboardHeader from './DashboardHeader';
 
-export default function Dashboard() {
+export default function Dashboard({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 max-h-screen'>
       {/* Header */}
-      <div className='mb-8'>
-        <h1 className='text-4xl font-semibold text-gray-900'>
-          Welcome back, Vardan!
-        </h1>
-        <p className='text-gray-600 mt-2'>
-          Here’s your job search progress at a glance.
-        </p>
-      </div>
+      <DashboardHeader user={user} />
 
       {/* Overview Cards */}
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-5'>

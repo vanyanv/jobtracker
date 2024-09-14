@@ -82,8 +82,7 @@ export async function getAllJobs() {
       },
     });
 
-    revalidatePath('/');
-    console.log(jobs);
+    return { data: jobs };
   } catch (error) {
     return { message: `Failed to get All Jobs` };
   }

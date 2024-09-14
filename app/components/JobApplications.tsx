@@ -1,7 +1,10 @@
-import { ApplicationTypes } from '@/app/libs/definitions';
-import { applications } from '@/app/libs/placeholder-data';
+import { getAllJobs } from '../actions/applications';
+import { Application } from '@prisma/client';
 
-export default function JobApplications() {
+export default async function JobApplications() {
+  const jobs = await getAllJobs();
+  console.log('In JobApplications', jobs.data);
+
   return (
     <div className='p-8 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50 min-h-screen'>
       {/* Header */}
@@ -19,28 +22,28 @@ export default function JobApplications() {
         <h2 className='text-2xl font-semibold text-gray-900 mb-4'>
           Your Applications
         </h2>
-        {applications.length === 0 ? (
+        {jobs?.data?.length === 0 ? (
           <p className='text-gray-500'>You have not applied to any jobs yet.</p>
         ) : (
           <ul className='space-y-4'>
-            {applications.map((job: ApplicationTypes) => (
+            {jobs?.data?.map((job: Application) => (
               <li
                 key={job.id}
                 className='flex items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50'
               >
                 <div className='flex flex-col'>
                   <h3 className='text-lg font-semibold text-gray-900'>
-                    {job.title}
+                    {job.jobTitle}
                   </h3>
-                  <p className='text-sm text-gray-600'>{job.company}</p>
+                  <p className='text-sm text-gray-600'>{job.companyName}</p>
                 </div>
                 <span
                   className={`px-3 py-1 text-sm font-medium rounded-full ${
-                    job.status === 'Applied'
+                    job.status === 'APPLIED'
                       ? 'bg-blue-100 text-blue-800'
-                      : job.status === 'Interview'
+                      : job.status === 'INTERVIEW'
                       ? 'bg-yellow-100 text-yellow-800'
-                      : job.status === 'Rejected'
+                      : job.status === 'REJECTED'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-green-100 text-green-800'
                   }`}
@@ -52,7 +55,6 @@ export default function JobApplications() {
           </ul>
         )}
       </div>
-
       {/* Add New Application Button */}
       <div className='flex justify-end mt-8'>
         <button className='bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold shadow-md transition-all duration-300'>
