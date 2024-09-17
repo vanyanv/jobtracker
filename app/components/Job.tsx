@@ -1,4 +1,3 @@
-'use server';
 import { Application } from '@prisma/client';
 import React from 'react';
 import { deleteAJob } from '../actions/applications';
@@ -32,9 +31,8 @@ export default async function Job({ job }: { job: Application }) {
           </span>
           <form
             action={async () => {
-              'use server';
               const deletedJob = await deleteAJob(job.id);
-              console.log('Deleted Job', deletedJob);
+              return deletedJob;
             }}
           >
             <button className='px-2 py-1 text-sm text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none'>

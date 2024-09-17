@@ -1,3 +1,5 @@
+//this is a server side rendered component
+
 import SidebarLinks from '../SidebarLinks';
 import { auth } from '@/auth';
 import Link from 'next/link';
@@ -7,7 +9,6 @@ export default async function Sidebar() {
   const session = await auth();
   //
   const user = session?.user || {};
-
 
   const navigationLinks: { [key: string]: string } = {
     Dashboard: '/dashboard',

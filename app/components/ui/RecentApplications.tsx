@@ -7,7 +7,6 @@ export default async function RecentApplications({
 }: {
   jobs: Application[];
 }) {
-  console.log(jobs);
   return (
     <>
       <div className='bg-white p-6 rounded-lg shadow-lg'>
