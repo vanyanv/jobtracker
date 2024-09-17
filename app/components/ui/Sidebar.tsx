@@ -1,13 +1,14 @@
-'use client';
 import SidebarLinks from '../SidebarLinks';
-import { User } from '@/app/libs/definitions';
+import { auth } from '@/auth';
 import Link from 'next/link';
 
-type SidebarProps = {
-  user: User;
-};
+export default async function Sidebar() {
+  //get user session
+  const session = await auth();
+  //
+  const user = session?.user || {};
 
-export default function Sidebar({ user }: SidebarProps) {
+
   const navigationLinks: { [key: string]: string } = {
     Dashboard: '/dashboard',
     Ai: '/dashboard/ai',

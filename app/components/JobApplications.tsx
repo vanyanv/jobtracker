@@ -1,6 +1,6 @@
 import { getAllJobs } from '../actions/applications';
 import { Application } from '@prisma/client';
-import Job from './Job';
+import ApplicationList from './ApplicationList';
 export default async function JobApplications() {
   const jobs = await getAllJobs();
   console.log('In JobApplications', jobs.data);
@@ -18,20 +18,7 @@ export default async function JobApplications() {
       </div>
 
       {/* Applications List */}
-      <div className='bg-white p-6 rounded-lg shadow-lg'>
-        <h2 className='text-2xl font-semibold text-gray-900 mb-4'>
-          Your Applications
-        </h2>
-        {jobs?.data?.length === 0 ? (
-          <p className='text-gray-500'>You have not applied to any jobs yet.</p>
-        ) : (
-          <ul className='space-y-4'>
-            {jobs?.data?.map((job: Application) => (
-              <Job key={job.id} job={job} />
-            ))}
-          </ul>
-        )}
-      </div>
+      <ApplicationList jobs={jobs.data as Application[]} />
       {/* Add New Application Button */}
       <div className='flex justify-end mt-8'>
         <button className='bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold shadow-md transition-all duration-300'>

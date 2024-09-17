@@ -14,6 +14,10 @@ type DashboardProps = {
 export default function Dashboard({ user, jobs }: DashboardProps) {
   const [open, setOpen] = useState(false);
 
+  const totalApplications = 18;
+  const inProgress = 20;
+  const offers = 10;
+
   return (
     <div className='min-h-screen flex flex-col p-4 sm:p-6 bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50'>
       {/* Header */}
@@ -27,7 +31,7 @@ export default function Dashboard({ user, jobs }: DashboardProps) {
             Total Applications
           </h3>
           <p className='text-2xl sm:text-3xl font-bold text-blue-600 mt-2'>
-            28
+            {totalApplications}
           </p>
         </div>
 
@@ -37,7 +41,7 @@ export default function Dashboard({ user, jobs }: DashboardProps) {
             In Progress
           </h3>
           <p className='text-2xl sm:text-3xl font-bold text-yellow-500 mt-2'>
-            5
+            {inProgress}
           </p>
         </div>
 
@@ -47,7 +51,7 @@ export default function Dashboard({ user, jobs }: DashboardProps) {
             Offers
           </h3>
           <p className='text-2xl sm:text-3xl font-bold text-green-500 mt-2'>
-            2
+            {offers}
           </p>
         </div>
 
